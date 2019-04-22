@@ -61,6 +61,7 @@ task('static', () => {
     'node_modules/p-slides/*.js',
     'node_modules/p-slides/css/**/*.css',
     'node_modules/prismjs/prism.js',
+    'node_modules/prismjs/components/prism-typescript.js',
     'node_modules/prismjs/themes/prism-okaidia.css'
   ], { base: './node_modules' })
     .pipe(dest('public/vendor'));
