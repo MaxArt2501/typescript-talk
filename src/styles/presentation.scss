@@ -97,6 +97,23 @@
   }
 }
 
-
 .ms-logo { height: 3em; }
 .lang-logo { height: 5em; }
+
+.playground-slide {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-gap: .5em 1em;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    box-shadow: 0 0 .5em rgba(black, .5);
+  }
+
+  a {
+    text-align: center;
+    grid-column-end: span 2;
+  }
+}
