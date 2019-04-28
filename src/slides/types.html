@@ -7,13 +7,15 @@ let entity: symbol = Symbol('question');</code></p-fragment>
 <p-fragment><code>let whatever: any;</code></p-fragment></pre>
 </p-slide>
 <p-slide>
-  <pre class="big language-typescript"><code>let fib: number[] = [ 0, 1, 1, 2, 3, 5, 8 ];</code>
+  <pre class="big language-typescript"><code>let fib: number[]      = [ 0, 1, 1, 2, 3, 5, 8 ];</code>
 <p-fragment><code>let fib: Array&lt;number> = [ 0, 1, 1, 2, 3, 5, 8 ];</code></p-fragment>
 
-<p-fragment><code>function count(source: string, ref: string): number {
+<p-fragment><code>let point: [ number, number ] = [ 2, -1 ];</code></p-fragment>
+
+<p-fragment><code>function count(src: string, ref: string): number {
   return source.split(ref).length - 1;
 }</code></p-fragment>
-</pre>
+<p-fragment><code>let countFn: (src: string, ref: string) => number;</code></p-fragment></pre>
 </p-slide>
 <p-slide>
   <h3 class="our-header">More complex types</h3>
@@ -23,4 +25,13 @@ let entity: symbol = Symbol('question');</code></p-fragment>
   id: number;
   name: string
 }</code></p-fragment></pre>
+</p-slide>
+<p-slide>
+  <h3 class="our-header">Type inference</h3>
+  <pre class="big language-typescript"><p-fragment><code>let answer = 42;              // => number</code></p-fragment>
+<p-fragment><code>let states = [ 'on', 'off' ]; // => string[]</code></p-fragment>
+<p-fragment><code>let user = { name: 'Emma' };  // => { name: string }</code></p-fragment>
+<p-fragment><code>let none = null;              // => any</code></p-fragment>
+<p-fragment><code>type CountFn = typeof count;
+             // (src: string, ref: string) => number</code></p-fragment></pre>
 </p-slide>
