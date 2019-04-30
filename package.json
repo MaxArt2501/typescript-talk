@@ -1,5 +1,5 @@
 {
-  "name": "p-slides-boilerplate",
+  "name": "typescript-talk",
   "version": "0.0.1",
   "description": "TypeScript: JavaScript on steroids for applications at scale",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "keywords": [
     "presentation",
-    "boilerplate"
+    "typescript"
   ],
   "author": {
     "name": "Massimo Artizzu",
