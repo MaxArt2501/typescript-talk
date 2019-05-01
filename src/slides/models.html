@@ -1,0 +1,73 @@
+<p-slide>
+  <h3 class="our-header">What defines a type? 🤔</h3>
+  <p-fragment>
+    <pre class="big language-typescript"><code>type Point2D = [ number, number ];</code>
+
+<p-fragment><code>interface User { ... }</code></p-fragment>
+
+<p-fragment><code>class Button { ... }</code></p-fragment>
+
+<p-fragment><code>enum LogLevel { WARN, ... }</code></p-fragment></pre>
+  </p-fragment>
+</p-slide>
+<p-slide>
+  <h3 class="our-header">Why <code>interface</code>s? 🤷‍♀️</h3>
+  <div class="two-columns">
+    <pre class="big language-typescript"><code>interface Loggable {
+  username: string;
+  login(): boolean;
+}
+class User
+  implements Loggable {
+  ... }</code></pre>
+    <p-fragment><pre class="big language-typescript"><code>type Loggable = {
+  username: string;
+  login(): boolean;
+}
+class User
+  implements Loggable {
+  ... }</code></pre></p-fragment>
+  </div>
+</p-slide>
+<p-slide>
+  <div class="two-columns center">
+    <div>
+      <h3><code>type</code> aliases</h3>
+      👇
+      <p>type shortenings and manipulations</p>
+    </div>
+    <div>
+      <h3><code>interface</code></h3>
+      👇
+      <p>object <em>shape</em> definitions</p>
+    </div>
+  </div>
+</p-slide>
+<p-slide>
+  <div class="two-columns center">
+    <div>
+      <pre class="big language-typescript"><code>// models/car.ts
+interface Car {
+  model: string;
+  brand: Brand;
+  engine: Engine;
+}</code></pre>
+      <pre class="big language-typescript"><code>// models/brand.ts
+interface Brand {
+  name: string;
+}</code></pre>
+    </div>
+    <div>
+      <pre class="big language-typescript"><code>// models/engine.ts
+interface Engine {
+  model: string;
+  fuel: FuelType;
+  size?: number;
+}</code></pre>
+      <pre class="big language-typescript"><code>// models/fuel-type.ts
+enum FuelType {
+  GASOLINE, DIESEL
+}</code></pre>
+    </div>
+  </div>
+</p-slide>
