@@ -11,15 +11,19 @@
   </p-fragment>
 </p-slide>
 <p-slide>
-  <h3 class="our-header">Why <code>interface</code>s? 🤷‍♀️</h3>
+  <h3 class="our-header">
+    Why <code>interface</code>s? 🤷‍♀️
+    <p-fragment><small>(and not <code>type</code>s)</small></p-fragment>
+  </h3>
   <div class="two-columns">
-    <pre class="big language-typescript"><code>interface Loggable {
+    <p-fragment><pre class="big language-typescript"><code>interface Loggable {
   username: string;
   login(): boolean;
 }
 class User
   implements Loggable {
   ... }</code></pre>
+    </p-fragment>
     <p-fragment><pre class="big language-typescript"><code>type Loggable = {
   username: string;
   login(): boolean;
