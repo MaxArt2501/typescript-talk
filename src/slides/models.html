@@ -15,15 +15,22 @@
     Why <code>interface</code>s? 🤷‍♀️
     <p-fragment><small>(and not <code>type</code>s)</small></p-fragment>
   </h3>
+  <p-fragment>
+    <h4 class="big-x-wrapper center">
+      "Type aliases cannot be extended or implemented from (nor can they extend/implement other types)"
+      <p-fragment><span class="big-x"></span></p-fragment>
+    </h4>
+  </p-fragment>
+</p-slide>
+<p-slide>
   <div class="two-columns">
-    <p-fragment><pre class="big language-typescript"><code>interface Loggable {
+    <pre class="big language-typescript"><code>interface Loggable {
   username: string;
   login(): boolean;
 }
 class User
   implements Loggable {
   ... }</code></pre>
-    </p-fragment>
     <p-fragment><pre class="big language-typescript"><code>type Loggable = {
   username: string;
   login(): boolean;
@@ -32,6 +39,19 @@ class User
   implements Loggable {
   ... }</code></pre></p-fragment>
   </div>
+</p-slide>
+<p-slide>
+  <pre class="big language-typescript"><p-fragment><code>interface Admin extends Loggable {
+  addUser(user: User): boolean;
+}</code></p-fragment>
+
+<p-fragment><code>type SuperAdmin = Admin & {
+  deleteUser(user: User): boolean;
+}</code></p-fragment></pre>
+</p-slide>
+<p-slide class="center justify-start unpadded">
+  <img src="img/celebrating.gif" alt="Stephen Colbert dancing" class="full-media">
+  <h2 class="meme-text blink">Old documentation rocks!</h2>
 </p-slide>
 <p-slide>
   <div class="two-columns center">

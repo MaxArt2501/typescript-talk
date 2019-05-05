@@ -20,8 +20,22 @@
 <p-slide>
   <h3 class="our-header">3. On the web</h3>
   <div class="playground-slide">
-    <img src="img/playground.png" alt="TypeScript playground screenshot">
-    <img src="img/playground-qrcode.svg" aria-hidden="true">
+    <img src="img/playground.png" alt="TypeScript playground screenshot" class="shadow">
+    <img src="img/playground-qrcode.svg" aria-hidden="true" class="shadow">
     <a href="https://typescript-play.js.org/">typescript-play.js.org</a>
   </div>
+</p-slide>
+<p-slide>
+  <h3 class="our-header">4. In your IDE</h3>
+  <img src="img/vscode.png" alt="A TypeScript file in VS Code" class="shadow" style="width: 15em">
+</p-slide>
+<p-slide>
+  <h4 class="our-header"><code>tsconfig.json</code></h4>
+  <pre class="big language-javascript">{
+  <p-fragment><code>"include": [ "src/**/*.ts" ],</code></p-fragment>
+  <p-fragment><code>"exclude": [ "src/**/*.spec.ts" ],</code></p-fragment>
+  <p-fragment><code>"compilerOptions": {
+    "target": "ES2015",
+    "outDir": "dist",
+    "strictNullChecks": true, ... }</code></p-fragment> }</pre>
 </p-slide>

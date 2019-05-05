@@ -105,6 +105,10 @@
   padding: 0 .25em;
 }
 
+.shadow {
+  box-shadow: 0 0 .5em rgba(black, .5);
+}
+
 .playground-slide {
   display: grid;
   grid-template-columns: 70% 30%;
@@ -114,11 +118,31 @@
 
   img {
     width: 100%;
-    box-shadow: 0 0 .5em rgba(black, .5);
   }
 
   a {
     text-align: center;
     grid-column-end: span 2;
+  }
+}
+
+.big-x {
+  &-wrapper {
+    position: relative;
+  }
+
+  &::before, &::after {
+    content: "";
+    top: -25%;
+    left: 50%;
+    height: 150%;
+    width: .5em;
+    border-radius: .25em;
+    transform: rotate(45deg);
+    background: rgba(red, .9);
+    position: absolute;
+  }
+  &::after {
+    transform: rotate(-45deg);
   }
 }
