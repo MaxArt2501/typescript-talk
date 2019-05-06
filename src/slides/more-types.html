@@ -1,0 +1,37 @@
+<p-slide>
+  <h2 class="our-header">Operations on types</h2>
+</p-slide>
+<p-slide>
+  <h4 class="our-header">Type intersection</h4>
+  <p-fragment>
+    <pre class="big language-typescript"><code>type User = { username: string; }
+type Creator = {
+  addUser: (username: string) => boolean;
+}</code>
+
+<p-fragment><code>type Admin = User & Creator;</code></p-fragment></pre>
+  </p-fragment>
+</p-slide>
+<p-slide>
+  <svg viewBox="0 0 150 100" style="width: 12em">
+    <circle cx="50" cy="50" r="49.5" stroke="#000" fill="#f60"/>
+    <circle cx="100" cy="50" r="49.5" stroke="#000" fill="#2fa"/>
+    <path d="M75,7.132A49.5,49.5 0 0 1 75,92.868 49.5,49.5 0 0 1 75,7.132" stroke="#000" fill="#ffa" stroke-width="1"/>
+    <text x="25" y="50" text-anchor="middle" font-size="15%">User</text>
+    <text x="75" y="50" text-anchor="middle" font-size="15%">Admin</text>
+    <text x="125" y="50" text-anchor="middle" font-size="15%">Creator</text>
+  </svg>
+</p-slide>
+<p-slide>
+  <h4 class="our-header">Type union</h4>
+  <p-fragment>
+    <pre class="big language-typescript"><code>function utter(answer: string | number) {
+  console.log(`The answer is ${answer}`);
+}</code>
+<p-fragment><code>class Family {
+  pet: Cat | Dog;
+}</code></p-fragment>
+<p-fragment><code>type Method = 'GET' | 'POST' | 'DELETE';</code></p-fragment>
+<p-fragment><code>function request(method: Method, url: string) {...}</code></p-fragment></pre>
+  </p-fragment>
+</p-slide>
