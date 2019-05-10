@@ -14,7 +14,10 @@
   </p-fragment>
 </p-slide>
 <p-slide class="center justify-center">
-  <h1>But&hellip;</h1>
+  <h1>So&hellip; TypeScript.</h1>
+</p-slide>
+<p-slide>
+  <img src="img/butwhy.webp" alt="'But why?' surgeon meme" class="full-media">
 </p-slide>
 <p-slide class="center justify-center">
   <img src="img/js-growth.png" alt="Chart showing the growth of JavaScript payloads from 2010 to 2019" style="width: 20em; margin-bottom: .5em;">
@@ -22,19 +25,19 @@
 </p-slide>
 <p-slide class="justify-center">
   <h2 class="our-header">
-    The problem we're facing<br>
+    The problems we're facing<br>
     <small>with modern web development</small>
   </h2>
 </p-slide>
 <p-slide>
-  <pre class="big language-javascript"><code>$.ajax({
-  url: '...', method: 'POST',
-  body: {...}, contentType: 'json'
-});</code>
+  <pre class="big language-javascript"><code>let total = costs.reduce(0, (num, sum) => num + sum);</code>
 
-<p-fragment><code>let total = costs.reduce(0, (num, sum) => num + sum);</code></p-fragment>
+<p-fragment><code>const answer = list.lastFind(item => item.id === 42);</code></p-fragment>
 
-<p-fragment><code>const answer = list.lastFind(item => item.id === 42);</code></p-fragment></pre>
+<p-fragment><code>$.ajax({
+    url: '...', method: 'POST',
+    body: {...}, contentType: 'json'
+  });</code></p-fragment></pre>
 </p-slide>
 <p-slide class="center justify-center">
   <h1>What happens</h1>
@@ -54,15 +57,27 @@
 <p-slide>
   <img src="img/freaking-out.gif" alt="Lego Movie characters freaking out" class="full-media">
 </p-slide>
-<p-slide class="center justify-center">
-  <h3>We needed</h3>
-  <h1>better tools</h1>
+<p-slide class="random-features">
+  <p-fragment><pre><code class="language-javascript">let index: number;</code></pre></p-fragment>
+  <p-fragment><pre><code class="language-javascript">interface User {
+  name: string;
+}</code></pre></p-fragment>
+  <p-fragment><pre><code class="language-javascript">type Method = 'GET' | 'POST';</code></pre></p-fragment>
+  <p-fragment><pre><code class="language-javascript">function capitalize(src: string) {}</code></pre></p-fragment>
+  <p-fragment><pre><code class="language-javascript">class Car implements Vehicle {}</code></pre></p-fragment>
+  <p-fragment><pre><code class="language-javascript">private readonly index: number;</code></pre></p-fragment>
+  <p-fragment><pre><code class="language-javascript">request&lt;T>(url: string): Promise&lt;T></code></pre></p-fragment>
+  <p-fragment><pre><code class="language-javascript">type Guest = Partial&lt;User>;</code></pre></p-fragment>
+  <p-fragment><pre><code class="language-javascript">let payload: {
+  [K in keyof Config]: Config[K];
+};</code></pre></p-fragment>
+  <p-fragment><pre><code class="language-javascript">declare var jQuery;</code></pre></p-fragment>
+  <p-fragment><pre><code class="language-javascript">import { Option } from 'fp-ts';</code></pre></p-fragment>
+  <p-fragment><pre><code class="language-javascript">enum Bool { TRUE, FALSE, FILE_NOT_FOUND };</code></pre></p-fragment>
 </p-slide>
-<p-slide class="justify-center">
-  <ul class="self-center">
-    <li><p-fragment>🛠 JSDoc</p-fragment></li>
-    <li><p-fragment>🛠 Elm, Dart, PureScript, &hellip;</p-fragment></li>
-    <li><p-fragment>🛠 Flow</p-fragment></li>
-    <li><p-fragment>🛠 TypeScript</p-fragment></li>
-  </ul>
+<p-slide class="center">
+  <h1>
+    <a href="https://www.typescriptlang.org/">typescriptlang.org</a>
+  </h1>
+  <p-fragment>(with some caveats&hellip;)</p-fragment>
 </p-slide>

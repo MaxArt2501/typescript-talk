@@ -1,4 +1,35 @@
 <p-slide>
+  <h2 class="our-header">Generics</h2>
+</p-slide>
+<p-slide>
+  <pre class="big language-typescript self-center"><code>interface PagedList&lt;T> {
+  items: T[];
+  total: number;
+}</code>
+
+<p-fragment><code>const results: PagedList&lt;User> =
+  await getUsers();</code></p-fragment></pre>
+</p-slide>
+<p-slide>
+  <h4 class="our-header">Notable cases</h4>
+  <pre class="big language-typescript self-center"><code>const roles: Array&lt;string> =
+    [ 'USER', 'ADMIN', 'GUEST' ];</code>
+
+<p-fragment><code>const request: Promise&lt;Request> = fetch('...');</code></p-fragment>
+<p-fragment><code>const models: Promise&lt;Model[]> = request.json();</code></p-fragment>
+
+<p-fragment><code>let user$: Observable&lt;User>;</code></p-fragment></pre>
+</p-slide>
+<p-slide>
+  <h4 class="our-header">From TypeScript itself 👇</h4>
+  <pre class="big language-typescript self-center"><code>const cart: Partial&lt;Car> = {
+  model: 'Cart'
+};</code>
+
+<p-fragment><code>const request: Record&lt;Request> = fetch('...');</code></p-fragment>
+<p-fragment><code>const models: Promise&lt;Model[]> = request.json();</code></p-fragment></pre>
+</p-slide>
+<p-slide>
   <h2 class="our-header">Operations on types</h2>
 </p-slide>
 <p-slide>
