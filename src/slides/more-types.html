@@ -24,16 +24,18 @@ type Creator = {
 </p-slide>
 <p-slide>
   <h4 class="our-header">Type union</h4>
-  <p-fragment>
+  <p-fragment class="self-center">
     <pre class="big language-typescript"><code>function utter(answer: string | number) {
   console.log(`The answer is ${answer}`);
 }</code>
 <p-fragment><code>class Family {
   pet: Cat | Dog;
 }</code></p-fragment>
-<p-fragment><code>type Method = 'GET' | 'POST' | 'DELETE';</code></p-fragment>
-<p-fragment><code>function request(method: Method, url: string) {...}</code></p-fragment></pre>
+<p-fragment><code>type Method = 'GET' | 'POST' | 'DELETE';</code></p-fragment></pre>
   </p-fragment>
+</p-slide>
+<p-slide>
+  <h3 class="our-header">Type guards</h3>
 </p-slide>
 <p-slide>
   <pre class="big show-all language-typescript"><code>function getValue(
@@ -64,7 +66,15 @@ return (element as HTMLSelectElement)
   </p-fragment>
 </p-slide>
 <p-slide>
-  <h2 class="our-header">Tagged unions</h2>
+  <h4 class="our-header">Kinds of type guards</h4>
+  <pre class="big language-typescript"><p-fragment><code>if (typeof value === 'string') { ... }</code></p-fragment>
+
+<p-fragment><code>if (ref instanceof HTMLElement) { ... }</code></p-fragment>
+
+<p-fragment><code>if ('value' in item) { ... }</code></p-fragment></pre>
+</p-slide>
+<p-slide>
+  <h3 class="our-header">Tagged unions</h3>
 </p-slide>
 <p-slide>
   <div class="two-columns align-center">
@@ -93,4 +103,17 @@ type Kinds = Item['kind']
   }
   return item.price;
 }</code></pre>
+</p-slide>
+<p-slide>
+  <h4 class="our-header">Custom type guards</h4>
+  <p-fragment>
+    <pre class="big language-typescript"><code>function isTicket(item: Item): item is Ticket {
+  return item.kind === 'TICKET';
+}</code>
+
+<p-fragment><code>function getPrice(item: Item) {
+  if (isTicket(item)) {
+    return item.quantity * TICKET_PRICE;
+  }</code></p-fragment></pre>
+    </p-fragment>
 </p-slide>
