@@ -1,35 +1,4 @@
 <p-slide>
-  <h2 class="our-header">Generics</h2>
-</p-slide>
-<p-slide>
-  <pre class="big language-typescript self-center"><code>interface PagedList&lt;T> {
-  items: T[];
-  total: number;
-}</code>
-
-<p-fragment><code>const results: PagedList&lt;User> =
-  await getUsers();</code></p-fragment></pre>
-</p-slide>
-<p-slide>
-  <h4 class="our-header">Notable cases</h4>
-  <pre class="big language-typescript self-center"><code>const roles: Array&lt;string> =
-    [ 'USER', 'ADMIN', 'GUEST' ];</code>
-
-<p-fragment><code>const request: Promise&lt;Request> = fetch('...');</code></p-fragment>
-<p-fragment><code>const models: Promise&lt;Model[]> = request.json();</code></p-fragment>
-
-<p-fragment><code>let user$: Observable&lt;User>;</code></p-fragment></pre>
-</p-slide>
-<p-slide>
-  <h4 class="our-header">From TypeScript itself 👇</h4>
-  <pre class="big language-typescript self-center"><code>const cart: Partial&lt;Car> = {
-  model: 'Cart'
-};</code>
-
-<p-fragment><code>const request: Record&lt;Request> = fetch('...');</code></p-fragment>
-<p-fragment><code>const models: Promise&lt;Model[]> = request.json();</code></p-fragment></pre>
-</p-slide>
-<p-slide>
   <h2 class="our-header">Operations on types</h2>
 </p-slide>
 <p-slide>
@@ -65,4 +34,63 @@ type Creator = {
 <p-fragment><code>type Method = 'GET' | 'POST' | 'DELETE';</code></p-fragment>
 <p-fragment><code>function request(method: Method, url: string) {...}</code></p-fragment></pre>
   </p-fragment>
+</p-slide>
+<p-slide>
+  <pre class="big show-all language-typescript"><code>function getValue(
+  element: HTMLInputElement | HTMLSelectElement
+) {
+  if (element.matches('.my-select')) {
+    const index = element.</code><code class="error">selectedIndex</code>;
+    <code>return element.</code><code class="error">options</code><p-fragment><div class="suggestions">
+  <ul style="width: 20em; left: -4em; top: 0.4em;">
+    <li class="message">Property 'options' does not exist on type 'HTMLInputElement | HTMLSelectElement'.</li>
+    <li class="message">&nbsp;&nbsp;&nbsp;Property 'options' does not exist on type 'HTMLInputElement'.</li>
+  </ul>
+</div></p-fragment><code>[index].text;
+  }
+  return element.value;
+}</code></pre>
+</p-slide>
+<p-slide>
+  <pre class="big language-typescript"><code>const index = (&lt;HTMLSelectElement>element)
+  .selectedIndex;
+return (element as HTMLSelectElement)
+  .options[index].text;</code></pre>
+  <p-fragment>
+    <pre class="big language-typescript"><code>if (element instanceof HTMLSelectElement) {
+  const index = element.selectedIndex;
+  return element.options[index].text;
+}</code></pre>
+  </p-fragment>
+</p-slide>
+<p-slide>
+  <h2 class="our-header">Tagged unions</h2>
+</p-slide>
+<p-slide>
+  <div class="two-columns align-center">
+    <pre class="big language-typescript"><code>interface Ticket {
+  kind: 'TICKET';
+  quantity: number;
+}
+interface Seasonal {
+  kind: 'SEASONAL';
+  price: number;
+}</code></pre>
+    <p-fragment>
+    <pre class="big language-typescript"><code>type Item =
+  | Ticket
+  | Seasonal
+
+type Kinds = Item['kind']
+// 'TICKET' | 'SEASONAL'</code></pre>
+    </p-fragment>
+  </div>
+</p-slide>
+<p-slide>
+  <pre class="big self-center language-typescript"><code>function getPrice(item: Item) {
+  if (item.kind === 'TICKET') {
+    return item.quantity * TICKET_PRICE;
+  }
+  return item.price;
+}</code></pre>
 </p-slide>
