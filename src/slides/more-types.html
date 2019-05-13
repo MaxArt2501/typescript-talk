@@ -106,14 +106,73 @@ type Kinds = Item['kind']
 </p-slide>
 <p-slide>
   <h4 class="our-header">Custom type guards</h4>
-  <p-fragment>
-    <pre class="big language-typescript"><code>function isTicket(item: Item): item is Ticket {
+  <p-fragment class="self-center">
+    <pre class="language-typescript"><code>function isTicket(item: Item): item is Ticket {
   return item.kind === 'TICKET';
 }</code>
 
 <p-fragment><code>function getPrice(item: Item) {
   if (isTicket(item)) {
     return item.quantity * TICKET_PRICE;
-  }</code></p-fragment></pre>
+  }
+  return item.price;
+}</code></p-fragment></pre>
     </p-fragment>
+</p-slide>
+<p-slide>
+  <h2 class="our-header">Conditional types</h2>
+</p-slide>
+<p-slide>
+  <pre class="big language-typescript self-center"><code>T extends U ? X : Y</code></pre>
+</p-slide>
+<p-slide>
+  <pre class="big language-typescript self-center"><code>type Exclude&lt;T, U> = T extends U ? never : T;</code>
+
+<p-fragment><code>type NonNullable&lt;T> = Exclude&lt;T, null | undefined>;</code></p-fragment></pre>
+</p-slide>
+<p-slide>
+  <pre class="big language-typescript self-center"><code>interface UserWithId {
+  id: string;
+  name: string;
+}</code>
+<p-fragment><code>type UserKeys = keyof UserWithId; // 'id' | 'name'</code></p-fragment>
+
+<p-fragment><code>type User = {
+  [K in Exclude&lt;UserKeys, 'id'>]: UserWithId[K];
+};</code></p-fragment><p-fragment><code> // { name: string }</code></p-fragment></pre>
+</p-slide>
+<p-slide class="unpadded">
+  <pre class="big language-typescript self-center"><code>type MethodNames&lt;T> = {</code>
+  <p-fragment><code>[K in keyof T]: </code></p-fragment><p-fragment><code>T[K] extends Function</code></p-fragment> <p-fragment><code>? K</code></p-fragment> <p-fragment><code>: never;</code></p-fragment>
+}</code><p-fragment><code>[keyof T];</code></p-fragment>
+
+<p-fragment><code>interface Dog {
+  name: string;
+  bark: () => string;
+  walk: (mins: number) => void;
+}</code></p-fragment>
+<p-fragment><code>type DogActions = MethodNames&lt;Dog>;</code></p-fragment><p-fragment><code> // 'bark'|'walk'</code></p-fragment></pre>
+</p-slide>
+<p-slide>
+  <pre class="big language-typescript self-center"><code>interface IndexAction {
+  kind: 'INDEX';
+  index: number;
+}
+interface TitleAction {
+  kind: 'TITLE';
+  title: string;
+}
+type Action = IndexAction | TitleAction;</code></pre>
+</p-slide>
+<p-slide>
+  <pre class="big language-typescript self-center"><code>type GetFromKind&lt;A, T>
+  = A extends { type: T } ? A : never;</code>
+
+<p-fragment><code>type ActionFromKind&lt;T extends Action['kind']>
+  = GetFromKind&lt;Action, T>;</code></p-fragment>
+
+<p-fragment><code>ActionFromKind&lt;'INDEX'> // IndexAction</code></p-fragment></pre>
+</p-slide>
+<p-slide>
+  <img src="img/headache.gif" alt="A man having a headache" class="full-media">
 </p-slide>
