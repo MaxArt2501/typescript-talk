@@ -32,9 +32,12 @@
 </p-slide>
 <p-slide>
   <pre class="big language-typescript self-center"><code>function getFullName(user: User) {
-  return `${user.surname.toUpperCase()}, ${user.name}`
+  return user.surname.toUpperCase() +
+    ' ' + user.name;
 }</code>
 
-<p-fragment><code>const fullName = getFullName({ name: 'Umad' } as User)</code></p-fragment></pre>
+<p-fragment><code>const fullName = getFullName(
+  { name: 'Umad' } as User
+);</code></p-fragment></pre>
 <p-fragment><img src="img/dancing-troll.gif" alt="Dancing troll meme" class="full-media"></p-fragment>
 </p-slide>

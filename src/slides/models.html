@@ -29,19 +29,19 @@
   login(): boolean;
 }
 class User
-  implements Loggable {
-  ... }</code></pre>
+  implements Loggable
+  { ... }</code></pre>
     <p-fragment><pre class="big language-typescript"><code>type Loggable = {
   username: string;
   login(): boolean;
 }
 class User
-  implements Loggable {
-  ... }</code></pre></p-fragment>
+  implements Loggable
+  { ... }</code></pre></p-fragment>
   </div>
 </p-slide>
 <p-slide>
-  <pre class="big language-typescript"><p-fragment><code>interface Admin extends Loggable {
+  <pre class="big self-center language-typescript"><p-fragment><code>interface Admin extends Loggable {
   addUser(user: User): boolean;
 }</code></p-fragment>
 

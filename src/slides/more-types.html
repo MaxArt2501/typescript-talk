@@ -3,7 +3,7 @@
 </p-slide>
 <p-slide>
   <h4 class="our-header">Type intersection</h4>
-  <p-fragment>
+  <p-fragment class="self-center">
     <pre class="big language-typescript"><code>type User = { username: string; }
 type Creator = {
   addUser: (username: string) => boolean;
@@ -91,8 +91,9 @@ interface Seasonal {
   | Ticket
   | Seasonal
 
-type Kinds = Item['kind']
-// 'TICKET' | 'SEASONAL'</code></pre>
+type Kinds
+  = Item['kind']
+// 'TICKET'|'SEASONAL'</code></pre>
     </p-fragment>
   </div>
 </p-slide>
@@ -126,9 +127,9 @@ type Kinds = Item['kind']
   <pre class="big language-typescript self-center"><code>T extends U ? X : Y</code></pre>
 </p-slide>
 <p-slide>
-  <pre class="big language-typescript self-center"><code>type Exclude&lt;T, U> = T extends U ? never : T;</code>
+  <pre class="big language-typescript self-center"><code>type Exclude&lt;T, U> = T extends U ? never : T</code>
 
-<p-fragment><code>type NonNullable&lt;T> = Exclude&lt;T, null | undefined>;</code></p-fragment></pre>
+<p-fragment><code>type NonNullable&lt;T> = Exclude&lt;T, null | undefined></code></p-fragment></pre>
 </p-slide>
 <p-slide>
   <pre class="big language-typescript self-center"><code>interface UserWithId {

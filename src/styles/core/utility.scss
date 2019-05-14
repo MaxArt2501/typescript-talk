@@ -81,7 +81,9 @@
   flex-wrap: wrap;
 
   > * {
-    flex: 0 0 calc(50% - 1em);
+    flex: 0 0 auto;
+    width: calc(50% - .5em);
+
     &:nth-child(odd) {
       margin-right: .5em;
     }
