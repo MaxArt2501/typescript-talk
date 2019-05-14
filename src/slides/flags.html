@@ -1,0 +1,62 @@
+<p-slide>
+  <h2 class="our-header">TypeScript compiler options</h2>
+</p-slide>
+<p-slide>
+  <h4 class="our-header"><code>--strictNullChecks</code></h4>
+  <pre class="big show-all language-typescript"><code>let</code> <code class="error">index</code><p-fragment><div class="suggestions">
+    <ul style="width: 16em">
+      <li class="message"><code class="language-typescript">let index: number</code></li>
+      <li class="message" data-error="ts2322">Type 'null' is not assignable to type 'number'.</li>
+    </ul>
+  </div></p-fragment><code>: number = null;</code></pre>
+</p-slide>
+<p-slide>
+  <pre class="big self-center language-typescript"><code>function getMailLink(user: User) {
+  return `mailto:${user.email}`;
+}</code>
+
+<p-fragment><code>getMailLink(null); // BOOM</code></p-fragment></pre>
+</p-slide>
+<p-slide>
+  <h4 class="our-header"><code>--noImplicitAny</code></h4>
+  <pre class="big show-all language-typescript"><code>function sum(</code><code class="error">list</code><code>) { ... }</code>
+
+<p-fragment><code>class MainComponent {</code>
+  <code class="error">index</code><p-fragment><div class="suggestions">
+    <ul style="width: 20em">
+      <li class="message">(property) <code class="language-typescript">MainComponent.index: any</code></li>
+      <li class="message" data-error="ts7008">Member 'foo' implicitly has an 'any' type.</li>
+    </ul>
+  </div></p-fragment>;
+<code>}</code></p-fragment></pre>
+</p-slide>
+<p-slide>
+  <h4 class="our-header"><code>--strict</code></h4>
+  <p-fragment class="self-center">
+    <ul>
+      <li><code>--noImplicitAny</code></li>
+      <li><code>--noImplicitThis</code></li>
+      <li><code>--alwaysStrict</code></li>
+      <li><code>--strictBindCallApply</code></li>
+      <li><code>--strictNullChecks</code></li>
+      <li><code>--strictFunctionTypes</code></li>
+      <li><code>--strictPropertyInitialization</code></li>
+    </ul>
+  </p-fragment>
+</p-slide>
+<p-slide>
+  <h4 class="our-header"><code>--target</code></h4>
+  <p-fragment class="self-center">
+    <ul>
+      <li><code>ES3</code></li>
+      <li><code>ES5</code></li>
+      <li><code>ES2015</code></li>
+      <li><code>ES2016</code></li>
+      <li><code>ES2017</code></li>
+      <li><code>ESNext</code></li>
+    </ul>
+  </p-fragment>
+</p-slide>
+<p-slide class="center">
+  <h4><a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html">typescriptlang.org/docs/handbook/compiler-options.html</a></h4>
+</p-slide>
