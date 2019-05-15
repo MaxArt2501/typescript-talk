@@ -47,6 +47,13 @@
   <img src="img/fp-ts-logo.png" alt="Logo of fp-ts" style="width: 6em">
   <h2><a href="https://github.com/gcanti/fp-ts">github.com/gcanti/fp-ts</a></h2>
 </p-slide>
+<p-slide>
+  <pre class="big self-center language-typescript"><code>const optionalUser: Option&lt;User>
+  = fromNullable(user);</code>
+<p-fragment><code>const userName = optionalUser
+  .map(user => `${user.name} ${user.surname}`)
+  .getOrElse('-');</code></p-fragment></pre>
+</p-slide>
 <p-slide class="center">
   <h1>Linting? 🤔</h1>
 </p-slide>
