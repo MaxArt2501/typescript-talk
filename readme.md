@@ -1,42 +1,24 @@
-P-Slides boilerplate
-====================
+TypeScript: JavaScript on steroids for applications at scale
+============================================================
 
-A boilerplate to create presentations with [P-Slides](https://github.com/MaxArt2501/p-slides)
+Slides for a talk about TypeScript. 93 slides, about 50 minutes.
 
-## What's in here?
+Originally conceived for the [DevRomagna Meetup](https://www.meetup.com/it-IT/DevRomagna/) (in Italian) in Imola, 2019-05-16.
 
-This boilerplate offers a development workflow to use P-Slides.
+Built on top of [P-Slides](https://github.com/MaxArt2501/p-slides)!
 
-Put your presentation HTML skeletons in `src/presentations` and your slides/groups of slides in `src/slides`.
+## Building
 
-It adds extra functionalities to the presentation:
-* Forward/backward buttons for navigation
-* Progress bar
-* Fullscreen toggle button
-* Speaker mode toggle button (Alt-M also works)
-* Background color matching with the current slide
-* Routing with URL fragments
-* Minor style additions
+Node.js 10.x is required (actually it could work in Node 8 - haven't checked).
 
-## Usage
+To start the presentation in development mode:
 
-This boilerplate uses [Gulp](https://gulpjs.com/) under the hood.
+1. Clone the repository;
+2. `npm i`
+3. `npm run serve`
 
-### `npm run build`
+Or `npm run build` to just build it, then serve `/public` with your HTTP server of choice.
 
-This executes Gulp's default task. It:
-* copies everything inside the `static` directory into `public`;
-* copies P-Slides modules and stylesheets into `public/vendors/p-slides`;
-* compiles `.scss` files in the `src/styles` directory, generates sourcemaps and copies the result into `public/css`;
-* copies `.js` files inside the `src/js` directory into `public/js`.
+## Tests
 
-To run the presentation, just serve `public/` with the HTTP static server of your choice.
-
-### `npm run serve`
-
-This does all of the above, but also starts a BrowserSync server, which auto-injects newly-compiled stylesheets and
-reloads the page whenever a `.js` or file inside `static` is modified.
-
-### `npm run clean`
-
-Deletes the `public` directory.
+... what?
