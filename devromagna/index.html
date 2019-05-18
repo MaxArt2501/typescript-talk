@@ -580,7 +580,7 @@ type Action = IndexAction | TitleAction;</code></pre>
 </p-slide>
 <p-slide>
   <pre class="big language-typescript self-center"><code>type GetFromKind&lt;A, T>
-  = A extends { type: T } ? A : never;</code>
+  = A extends { kind: T } ? A : never;</code>
 
 <p-fragment><code>type ActionFromKind&lt;T extends Action['kind']>
   = GetFromKind&lt;Action, T>;</code></p-fragment>
