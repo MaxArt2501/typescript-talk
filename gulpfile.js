@@ -1,19 +1,18 @@
 const { readFileSync } = require('fs');
-const gulp = require('gulp');
+const { src, dest, watch, series, parallel } = require('gulp');
 const sass = require('gulp-sass');
 const tap = require('gulp-tap');
-const sourcemaps = require('gulp-sourcemaps');
 const cleanCSS = require('gulp-clean-css');
 const rimraf = require('rimraf');
 const browserSync = require('browser-sync');
 const ghPages = require('gh-pages');
 
-const { src, dest } = gulp;
-const task = gulp.task.bind(gulp);
-const watch = gulp.watch.bind(gulp);
+async function reload() {
+  return browserSync.reload();
+}
 
-task('slides', () => {
-  src('src/presentations/**/*.html')
+function slides() {
+  return src('src/presentations/**/*.html')
     .pipe(tap(file => {
       const html = file.contents.toString();
       const parsed = html
@@ -32,32 +31,30 @@ task('slides', () => {
       file.contents = Buffer.from(parsed);
     }))
     .pipe(dest('public'));
-});
-task('slides+reload', [ 'slides' ], () => browserSync.reload());
+}
+exports.slides = slides;
+exports['slides+reload'] = series(slides, reload);
 
-task('css', () => {
-  src('src/styles/*.scss')
-    .pipe(sourcemaps.init())
+function css() {
+  return src('src/styles/*.scss', { sourcemaps: true })
     .pipe(sass())
     .pipe(cleanCSS())
-    .pipe(sourcemaps.write('.'))
-    .pipe(dest('public/css'))
+    .pipe(dest('public/css'), { sourcemaps: true })
     .pipe(browserSync.stream());
-});
+}
+exports.css = css;
 
-task('js', () => {
+function js() {
   // No compilation provided, just use ES modules.
   // Provide your own compilation if you want, though.
-  src('src/js/**/*.js')
+  return src('src/js/**/*.js')
     .pipe(dest('public/js'));
-});
-task('js+reload', [ 'js' ], () => browserSync.reload());
+}
+exports.js = js;
+exports['js+reload'] = series(js, reload);
 
-task('static', () => {
-  src('static/**/*')
-    .pipe(dest('public'));
-
-  src([
+const assets = () => src('static/**/*').pipe(dest('public'));
+const vendors = () => src([
     'node_modules/p-slides/components/**/*.js',
     'node_modules/p-slides/*.js',
     'node_modules/p-slides/css/**/*.css',
@@ -65,16 +62,21 @@ task('static', () => {
     'node_modules/prismjs/components/prism-typescript.js',
     'node_modules/prismjs/themes/prism-okaidia.css'
   ], { base: './node_modules' })
-    .pipe(dest('public/vendor'));
+  .pipe(dest('public/vendor'));
+exports.static = parallel(assets, vendors);
+exports['static+reload'] = series(exports.static, reload);
 
-});
-task('static+reload', [ 'static' ], () => browserSync.reload());
+const clean = async () => rimraf.sync('public');
+exports.clean = clean;
 
-task('clean', () => {
-  rimraf.sync('public');
-});
+exports.default = parallel(
+  exports.static,
+  exports.css,
+  exports.slides,
+  exports.js
+);
 
-task('serve', [ 'default' ], () => {
+exports.serve = series(exports.default, () => {
   browserSync.init({
     ghostMode: false,
     server: {
@@ -82,29 +84,34 @@ task('serve', [ 'default' ], () => {
     }
   });
 
-  watch('src/styles/**/*.scss', [ 'css' ]);
-  watch('src/{presentations,slides}/**/*.html', [ 'slides+reload' ]);
-  watch('src/js/**/*.js', [ 'js+reload' ]);
-  watch('static/**/*', [ 'static+reload' ]);
+  watch('src/styles/**/*.scss', exports.css);
+  watch('src/{presentations,slides}/**/*.html', exports['slides+reload']);
+  watch('src/js/**/*.js', exports['js+reload']);
+  watch('static/**/*', exports['static+reload']);
 });
 
-task('publish', [ 'default' ], () => {
+exports.publish = series(exports.default, () => {
   ghPages.publish('public', error => {
-    if (!error) {
+    if (error) {
+      console.error('Error while publishing on GitHub pages', error);
+    } else {
       console.log('Published on branch gh-pages');
     }
   });
 });
 
-task('watch:css', () => {
-  watch('src/styles/**/*.scss', [ 'css' ]);
-});
-task('watch:slides', () => {
-  watch('src/{presentation,slides}/*.html', [ 'slides' ]);
-});
-task('watch:static', () => {
-  watch([ 'static/**/*' ], [ 'static' ]);
-});
+exports['watch:css'] = function watchCss() {
+  return watch('src/styles/**/*.scss', exports.css);
+};
+exports['watch:slides'] = function watchSlides() {
+  return watch('src/{presentation,slides}/*.html', exports.slides);
+};
+exports['watch:static'] = function watchStatic() {
+  return watch([ 'static/**/*' ], exports.static);
+};
 
-task('watch', [ 'watch:static', 'watch:css', 'watch:slides' ]);
-task('default', [ 'static', 'css', 'slides', 'js' ]);
+exports.watch = parallel(
+  exports['watch:static'],
+  exports['watch:css'],
+  exports['watch:slides']
+);
