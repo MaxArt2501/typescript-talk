@@ -20,11 +20,11 @@
   <h4>
     <img src="img/ts-text.svg" alt="TypeScript logo" class="uff-logo">
     JavaScript on steroids for applications at scale
-    <small>Imola, 2019-05-16</small>
+    <small>Bologna, 2019-09-25</small>
   </h4>
   <div>
     <img src="img/ts-logo.svg" alt="(Unofficial, although well-knows) logo of TypeScript" class="logo">
-    <img src="img/devromagna.svg" alt="Logo of DevRomagna.js" class="logo">
+    <img src="img/bojs.svg" alt="Logo of Bologna JS" class="logo">
   </div>
 </p-slide>
 <p-slide class="justify-start">
@@ -47,8 +47,8 @@
 </p-slide>
 <p-slide class="center">
   <h3>You can find these slides at</h3>
-  <img src="img/qr-slides.svg" alt="QR Code for the presentation's link" style="height: 7em; margin-bottom: 1em;">
-  <a href="https://maxart2501.github.io/typescript-talk/devromagna/">maxart2501.github.io/typescript-talk/devromagna/</a>
+  <img src="img/qr-slides-bojs.svg" alt="QR Code for the presentation's link" style="height: 7em; margin-bottom: 1em;">
+  <a href="https://maxart2501.github.io/typescript-talk/bologna-js/">maxart2501.github.io/typescript-talk/bologna-js/</a>
 </p-slide>
     <p-slide class="center">
   <h2><span class="js-text">JavaScript</span> is weakly typed</h2>
@@ -193,11 +193,30 @@
 </p-slide>
     <p-slide>
   <h3 class="our-header">Using types</h3>
-  <pre class="big language-typescript"><code>let answer: number = 42;</code>
-<code>let name: string = 'Ford Prefect';
+  <pre class="big language-typescript"><code>let answer: number = 42;
+let name: string = 'Ford Prefect';
 let isAlien: boolean = true;
-let entity: symbol = Symbol('question');</code>
-<code>let whatever: any;</code></pre>
+let entity: symbol = Symbol('question');
+let whatever: any;
+let whenever: unknown; // since TS 3.0</code></pre>
+</p-slide>
+<p-slide>
+  <h1 class="center">
+    <code>any</code> vs. <code>unknown</code><br>
+    🤔
+  </h1>
+</p-slide>
+<p-slide>
+  <pre class="big show-all self-center language-typescript"><code>const anyUser: any = getUser();</code>
+<p-fragment><code>console.log(anyUser.name); // 👌</code></p-fragment>
+
+<p-fragment><code>const unknownUser: unknown = getUser();</code></p-fragment>
+<p-fragment><code>console.log(</code><code class="error">unknownUser</code><div class="suggestions">
+    <ul>
+      <li class="message" data-error="ts2571">Object is of type 'unknown'.</li>
+    </ul>
+  </div><code>.name);</code></p-fragment>
+</pre>
 </p-slide>
 <p-slide>
   <h4 class="our-header">Arrays</h4>
@@ -279,7 +298,7 @@ function count(...) { ... }
 <p-slide>
   <h3 class="our-header">Type aliases</h3>
   <p-fragment><pre class="big language-typescript"><code>type Point2D = [ number, number ]</code>
-<p-fragment><code>type User = { id: number, name: string }</code></p-fragment>
+<p-fragment><code>type List&lt;T> = { items: T[], total: number }</code></p-fragment>
 <p-fragment><code>type Method = 'GET' | 'POST' | 'DELETE'</code></p-fragment>
 <p-fragment><code>type Files = HTMLInputElement['files'] // File[]</code></p-fragment>
 <p-fragment><code>type CountFn = typeof count</code></p-fragment></pre></p-fragment>
@@ -412,42 +431,6 @@ const brand: Brand = {
   </p-fragment>
 </p-slide>
     <p-slide>
-  <h2 class="our-header">Operations on types</h2>
-</p-slide>
-<p-slide>
-  <h4 class="our-header">Type intersection</h4>
-  <p-fragment class="self-center">
-    <pre class="big language-typescript"><code>type User = { username: string; }
-type Creator = {
-  addUser: (username: string) => boolean;
-}</code>
-
-<p-fragment><code>type Admin = User & Creator;</code></p-fragment></pre>
-  </p-fragment>
-</p-slide>
-<p-slide>
-  <svg viewBox="0 0 150 100" style="width: 12em">
-    <circle cx="50" cy="50" r="49.5" stroke="#000" fill="#f60"/>
-    <circle cx="100" cy="50" r="49.5" stroke="#000" fill="#2fa"/>
-    <path d="M75,7.132A49.5,49.5 0 0 1 75,92.868 49.5,49.5 0 0 1 75,7.132" stroke="#000" fill="#ffa" stroke-width="1"/>
-    <text x="25" y="50" text-anchor="middle" font-size="15%">User</text>
-    <text x="75" y="50" text-anchor="middle" font-size="15%">Admin</text>
-    <text x="125" y="50" text-anchor="middle" font-size="15%">Creator</text>
-  </svg>
-</p-slide>
-<p-slide>
-  <h4 class="our-header">Type union</h4>
-  <p-fragment class="self-center">
-    <pre class="big language-typescript"><code>function utter(answer: string | number) {
-  console.log(`The answer is ${answer}`);
-}</code>
-<p-fragment><code>class Family {
-  pet: Cat | Dog;
-}</code></p-fragment>
-<p-fragment><code>type Method = 'GET' | 'POST' | 'DELETE';</code></p-fragment></pre>
-  </p-fragment>
-</p-slide>
-<p-slide>
   <h3 class="our-header">Type guards</h3>
 </p-slide>
 <p-slide>
@@ -487,50 +470,20 @@ return (element as HTMLSelectElement)
 <p-fragment><code>if ('value' in item) { ... }</code></p-fragment></pre>
 </p-slide>
 <p-slide>
-  <h3 class="our-header">Tagged unions</h3>
-</p-slide>
-<p-slide>
-  <div class="two-columns align-center">
-    <pre class="big language-typescript"><code>interface Ticket {
-  kind: 'TICKET';
-  quantity: number;
-}
-interface Seasonal {
-  kind: 'SEASONAL';
-  price: number;
-}</code></pre>
-    <p-fragment>
-    <pre class="big language-typescript"><code>type Item =
-  | Ticket
-  | Seasonal
-
-type Kinds
-  = Item['kind']
-// 'TICKET'|'SEASONAL'</code></pre>
-    </p-fragment>
-  </div>
-</p-slide>
-<p-slide>
-  <pre class="big self-center language-typescript"><code>function getPrice(item: Item) {
-  if (item.kind === 'TICKET') {
-    return item.quantity * TICKET_PRICE;
-  }
-  return item.price;
-}</code></pre>
-</p-slide>
-<p-slide>
   <h4 class="our-header">Custom type guards</h4>
   <p-fragment class="self-center">
-    <pre class="language-typescript"><code>function isTicket(item: Item): item is Ticket {
-  return item.kind === 'TICKET';
+    <pre class="language-typescript"><code>interface NamedItem {
+  name: string;
+}
+function isNamed(item: unknown): item is NamedItem {
+  return item && 'name' in item;
 }</code>
 
-<p-fragment><code>function getPrice(item: Item) {
-  if (isTicket(item)) {
-    return item.quantity * TICKET_PRICE;
-  }
-  return item.price;
-}</code></p-fragment></pre>
+<p-fragment><code>const user: unknown = getUser();
+if (isNamed(user)) {
+  console.log(user.name); // 👌
+}
+</code></p-fragment></pre>
     </p-fragment>
 </p-slide>
 <p-slide>
@@ -554,41 +507,6 @@ type Kinds
 <p-fragment><code>type User = {
   [K in Exclude&lt;UserKeys, 'id'>]: UserWithId[K];
 };</code></p-fragment><p-fragment><code> // { name: string }</code></p-fragment></pre>
-</p-slide>
-<p-slide class="unpadded">
-  <pre class="big language-typescript self-center"><code>type MethodNames&lt;T> = {</code>
-  <p-fragment><code>[K in keyof T]: </code></p-fragment><p-fragment><code>T[K] extends Function</code></p-fragment> <p-fragment><code>? K</code></p-fragment> <p-fragment><code>: never;</code></p-fragment>
-}</code><p-fragment><code>[keyof T];</code></p-fragment>
-
-<p-fragment><code>interface Dog {
-  name: string;
-  bark: () => string;
-  walk: (mins: number) => void;
-}</code></p-fragment>
-<p-fragment><code>type DogActions = MethodNames&lt;Dog>;</code></p-fragment><p-fragment><code> // 'bark'|'walk'</code></p-fragment></pre>
-</p-slide>
-<p-slide>
-  <pre class="big language-typescript self-center"><code>interface IndexAction {
-  kind: 'INDEX';
-  index: number;
-}
-interface TitleAction {
-  kind: 'TITLE';
-  title: string;
-}
-type Action = IndexAction | TitleAction;</code></pre>
-</p-slide>
-<p-slide>
-  <pre class="big language-typescript self-center"><code>type GetFromKind&lt;A, T>
-  = A extends { kind: T } ? A : never;</code>
-
-<p-fragment><code>type ActionFromKind&lt;T extends Action['kind']>
-  = GetFromKind&lt;Action, T>;</code></p-fragment>
-
-<p-fragment><code>ActionFromKind&lt;'INDEX'> // IndexAction</code></p-fragment></pre>
-</p-slide>
-<p-slide>
-  <img src="img/headache.gif" alt="A man having a headache" class="full-media">
 </p-slide>
     <p-slide class="center">
   <h3>Where do all those definitions come from?</h3>
@@ -803,8 +721,8 @@ type Action = IndexAction | TitleAction;</code></pre>
       <a href="https://itnext.io/why-use-typescript-good-and-bad-reasons-ccd807b292fb">itnext.io/why-use-typescript-good-and-bad-reasons-ccd807b292fb</a>
     </li>
     <li>
-      🔗 Italia JS Slack #typescript channel
-      <a href="https://italiajs.slack.com/messages/CAHLHRZAQ/">italiajs.slack.com/messages/CAHLHRZAQ/</a>
+      🔗 Bologna JS Slack #typescript channel
+      <a href="https://app.slack.com/client/T0C7QMQG6/CAAUE0690">app.slack.com/client/T0C7QMQG6/CAAUE0690</a>
     </li>
   </ul>
 </p-slide>
@@ -815,10 +733,10 @@ type Action = IndexAction | TitleAction;</code></pre>
 </p-slide>
 <p-slide>
   <h3 class="center final-link">
-    <a href="https://maxart2501.github.io/typescript-talk/devromagna/">
-      maxart2501.github.io/typescript-talk/devromagna/
+    <a href="https://maxart2501.github.io/typescript-talk/bologna-js/">
+      maxart2501.github.io/typescript-talk/bologna-js/
     </a>
-    <img src="img/qr-slides.svg" alt="QR Code for the presentation's link">
+    <img src="img/qr-slides-bojs.svg" alt="QR Code for the presentation's link">
   </h3>
 </p-slide>
 <p-slide>
