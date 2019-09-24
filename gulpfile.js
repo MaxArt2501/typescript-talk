@@ -90,12 +90,14 @@ exports.serve = series(exports.default, () => {
   watch('static/**/*', exports['static+reload']);
 });
 
-exports.publish = series(exports.default, () => {
+exports.publish = series(exports.default, done => {
   ghPages.publish('public', error => {
     if (error) {
       console.error('Error while publishing on GitHub pages', error);
+      done(Error(error));
     } else {
       console.log('Published on branch gh-pages');
+      done();
     }
   });
 });
