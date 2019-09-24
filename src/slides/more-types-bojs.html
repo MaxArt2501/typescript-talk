@@ -1,72 +1,4 @@
 <p-slide>
-  <h2 class="our-header">Operations on types</h2>
-</p-slide>
-<p-slide>
-  <h4 class="our-header">Type intersection</h4>
-  <p-fragment class="self-center">
-    <pre class="big language-typescript"><code>type User = { username: string; }
-type Creator = {
-  addUser: (username: string) => boolean;
-}</code>
-
-<p-fragment><code>type Admin = User & Creator;</code></p-fragment></pre>
-  </p-fragment>
-</p-slide>
-<p-slide>
-  <svg viewBox="0 0 150 100" style="width: 12em">
-    <circle cx="50" cy="50" r="49.5" stroke="#000" fill="#f60"/>
-    <circle cx="100" cy="50" r="49.5" stroke="#000" fill="#2fa"/>
-    <path d="M75,7.132A49.5,49.5 0 0 1 75,92.868 49.5,49.5 0 0 1 75,7.132" stroke="#000" fill="#ffa" stroke-width="1"/>
-    <text x="25" y="50" text-anchor="middle" font-size="15%">User</text>
-    <text x="75" y="50" text-anchor="middle" font-size="15%">Admin</text>
-    <text x="125" y="50" text-anchor="middle" font-size="15%">Creator</text>
-  </svg>
-</p-slide>
-<p-slide>
-  <h4 class="our-header">Type union</h4>
-  <p-fragment class="self-center">
-    <pre class="big language-typescript"><code>function utter(answer: string | number) {
-  console.log(`The answer is ${answer}`);
-}</code>
-<p-fragment><code>class Family {
-  pet: Cat | Dog;
-}</code></p-fragment>
-<p-fragment><code>type Method = 'GET' | 'POST' | 'DELETE';</code></p-fragment></pre>
-  </p-fragment>
-</p-slide>
-<p-slide>
-  <h3 class="our-header">Tagged unions</h3>
-</p-slide>
-<p-slide>
-  <div class="two-columns align-center">
-    <pre class="big language-typescript"><code>interface Ticket {
-  kind: 'TICKET';
-  quantity: number;
-}
-interface Seasonal {
-  kind: 'SEASONAL';
-  price: number;
-}</code></pre>
-    <p-fragment>
-    <pre class="big language-typescript"><code>type Item =
-  | Ticket
-  | Seasonal
-
-type Kinds
-  = Item['kind']
-// 'TICKET'|'SEASONAL'</code></pre>
-    </p-fragment>
-  </div>
-</p-slide>
-<p-slide>
-  <pre class="big self-center language-typescript"><code>function getPrice(item: Item) {
-  if (item.kind === 'TICKET') {
-    return item.quantity * TICKET_PRICE;
-  }
-  return item.price;
-}</code></pre>
-</p-slide>
-<p-slide>
   <h3 class="our-header">Type guards</h3>
 </p-slide>
 <p-slide>
@@ -107,20 +39,6 @@ return (element as HTMLSelectElement)
 </p-slide>
 <p-slide>
   <h4 class="our-header">Custom type guards</h4>
-  <p-fragment class="self-center">
-    <pre class="language-typescript"><code>function isTicket(item: Item): item is Ticket {
-  return item.kind === 'TICKET';
-}</code>
-
-<p-fragment><code>function getPrice(item: Item) {
-  if (isTicket(item)) {
-    return item.quantity * TICKET_PRICE;
-  }
-  return item.price;
-}</code></p-fragment></pre>
-    </p-fragment>
-</p-slide>
-<p-slide>
   <p-fragment class="self-center">
     <pre class="language-typescript"><code>interface NamedItem {
   name: string;
