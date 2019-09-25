@@ -238,3 +238,15 @@
     display: none;
   }
 }
+
+p-deck::after {
+  position: fixed;
+  bottom: .5em;
+  left: 0;
+  right: 0;
+  font-size: 50%;
+  text-align: center;
+  content: '@MaxArt2501';
+  color: #001236;
+  z-index: 100;
+}
